@@ -36,6 +36,11 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/react": "^8.0.1"
+    "@babel/core": "*",
+    "@babel/preset-env": "*",
+    "@babel/preset-react": "*",
+    "babel-jest": "*",
+    "jest": "*",
+    "react-test-renderer": "^16.8.6"
   }
 }

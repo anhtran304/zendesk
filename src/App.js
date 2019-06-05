@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-
+import Table from "./components/Table";
+import "./app.css";
 
 class App extends Component {
-  state = {users: []}
+  state = {tickets: []}
   componentDidMount() {
     fetch(`${process.env.REACT_APP_CORS}${process.env.REACT_APP_PROXY}api/v2/tickets.json`, {
       method: 'get',
@@ -12,16 +13,20 @@ class App extends Component {
       }
     })
     .then(res => res.json())
-    .then(users => {
-      console.log(users);
+    .then(tickets => {
+        this.setState({
+            tickets: tickets
+        });
+      console.log(tickets);
     })
     .catch((e) => alert("Sorry! Something went wrong. Because of " + e));
   }
 
   render() {
     return (
-      <div>
-        <h1>Users</h1>
+      <div className="container table-responsive mg-top-20">
+        <p className="h2">List all tickets</p>
+        <Table tickets={this.state.tickets}/>
       </div>
     );
   }
