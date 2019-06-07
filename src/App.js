@@ -17,14 +17,13 @@ class App extends Component {
         this.setState({
             tickets: tickets
         });
-      console.log(tickets);
     })
     .catch((e) => alert("Sorry! Something went wrong. Because of " + e));
   }
 
   render() {
     return (
-      <div className="container table-responsive mg-top-20">
+      <div className="container table-responsive mg-top-10">
         <p className="h2">List all tickets</p>
         <Table tickets={this.state.tickets}/>
       </div>
