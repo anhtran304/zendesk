@@ -10,10 +10,5 @@ describe("Table component", () => {
   ReactDOM.render(<Table />, div);
   ReactDOM.unmountComponentAtNode(div);
   });
-
-  test("it shows the expected text", () => {
-    const tickets = {}
-    const component = create(<Table tickets={tickets}/>);   
-    // const rootInstance = component.root;
-  });
+  
 });

@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
-import Table from "./components/Table";
-import "./app.css";
+import Table from "../../components/Table";
+import "./style.css";
 
-class App extends Component {
-  state = {tickets: []}
+class TicketList extends Component {
+  constructor( props ) {
+      super( props );
+      this.state = {
+        tickets: []
+      };
+  }
+  
   componentDidMount() {
     fetch(`${process.env.REACT_APP_CORS}${process.env.REACT_APP_PROXY}api/v2/tickets.json`, {
       method: 'get',
@@ -31,4 +37,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default TicketList;
