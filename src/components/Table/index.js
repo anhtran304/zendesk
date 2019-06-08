@@ -14,7 +14,7 @@ class Table extends Component {
                 <thead className="thead-light">
                 <tr key="js-table-tickets">
                     {/* <th className="d-none">Url</th> */}
-                    <th>Id</th>
+                    <th className="d-none">Id</th>
                     <th>Subject</th>
                     <th>Description</th>
                     <th>Priority</th>

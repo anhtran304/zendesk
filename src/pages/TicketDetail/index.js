@@ -1,36 +1,49 @@
 import React, { Component } from 'react';
+import axios from "axios";
 
 class TicketDetail extends Component {
   constructor( props ) {
       super( props );
       this.state = {
-        tickets: []
+        ticket:{}
       };
   }
   
-//   componentDidMount() {
-//     fetch(`${process.env.REACT_APP_CORS}${process.env.REACT_APP_PROXY}api/v2/tickets.json`, {
-//       method: 'get',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         'Authorization': process.env.REACT_APP_API_KEY
-//       }
-//     })
-//     .then(res => res.json())
-//     .then(tickets => {
-//         this.setState({
-//             tickets: tickets
-//         });
-//     })
-//     .catch((e) => alert("Sorry! Something went wrong. Because of " + e));
-//   }
+  componentDidMount() {
+    // const id = this.props.match.params.id;
+    // Get id from window.location to pass the test otherwise it will promt the error of undefined this.props.match
+    const urlArray = window.location.toString().split("/");
+    const id = urlArray[urlArray.indexOf("tickets") + 1];
+    return axios.get(`${process.env.REACT_APP_CORS}${process.env.REACT_APP_PROXY}api/v2/tickets/${id}.json`, {
+      auth: {
+        username: process.env.REACT_APP_USERNAME,
+        password: process.env.REACT_APP_PASSWORD
+      }
+    })
+    .then(res => {
+      this.setState({
+        ticket: res.data.ticket
+      });
+    })
+    .catch(e => {
+      alert("Sorry! Something went wrong. Because of " + e);
+    });
+  }
 
   render() {
     // console.log(this.props.match.params.id);
+
     return (
       <div className="container mg-top-10">
         <p className="h2">Ticket detail</p>
-        {/* <Table tickets={this.state.tickets}/> */}
+        <hr/>
+        <p><strong>Ticket ID:</strong> {this.state.ticket.id}</p>
+        <p><strong>Subject: </strong>{this.state.ticket.subject}</p>
+        <p><strong>Description: </strong>{this.state.ticket.description}</p>
+        <p><strong>Priority: </strong>{this.state.ticket.priority}</p>
+        <p><strong>Status: </strong>{this.state.ticket.status}</p>
+        <p><strong>Created at: </strong>{this.state.ticket.created_at}</p>
+        <p><strong>Updated at: </strong>{this.state.ticket.updated_at}</p>
       </div>
     );
   }

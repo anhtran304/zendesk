@@ -9,7 +9,7 @@ class TableBody extends Component {
     }
 
     handleClick = ( id ) => {
-        window.location =  `/tickets/${id}`;
+        window.location =  `tickets/${id}`;
     };
 
     render() {
@@ -18,10 +18,11 @@ class TableBody extends Component {
             if ( this.props.tickets.tickets ) {
                 let tickets = this.props.tickets.tickets;
                 if ( tickets.length > 0 ) {
+                    // Loop through tickets array to create each row in table
                     tickets.forEach( ticket => {
                         returnBody.push(
                             <tr className = "li-hover" key={ ticket.id } onClick={ this.handleClick.bind( null, ticket.id ) }>
-                                <td>{ ticket.id }</td>
+                                <td className="d-none">{ ticket.id }</td>
                                 <td>{ ticket.subject }</td>
                                 <td>{ ticket.description }</td>
                                 <td>{ ticket.priority }</td>
@@ -35,7 +36,7 @@ class TableBody extends Component {
             };
         };
         return returnBody;
-  }
+    }
 }
 
 export default TableBody;

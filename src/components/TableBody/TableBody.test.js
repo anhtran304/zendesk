@@ -4,8 +4,6 @@ import axios from "axios";
 import { create } from "react-test-renderer";
 import TableBody from "./index.js";
 
-// jest.mock("axios");
-
 describe("TableBody component", () => {
 
   it('renders without crashing', () => {
@@ -76,7 +74,7 @@ describe("TableBody component", () => {
     const component = create(<TableBody tickets = { tickets }/>);
     const testInstance = component.root;
     
-    // Testing
+    // Testing rendered data to be the same with props data
     expect(testInstance.findByType(TableBody).props.tickets.tickets[0].id).toBe(tickets.tickets[0].id);
     expect(testInstance.findByType(TableBody).props.tickets.tickets[0].subject).toBe(tickets.tickets[0].subject);
     expect(testInstance.findByType(TableBody).props.tickets.tickets[0].description).toBe(tickets.tickets[0].description);
@@ -85,4 +83,5 @@ describe("TableBody component", () => {
     expect(testInstance.findByType(TableBody).props.tickets.tickets[0].created_at).toBe(tickets.tickets[0].created_at);
     expect(testInstance.findByType(TableBody).props.tickets.tickets[0].updated_at).toBe(tickets.tickets[0].updated_at);
   });
+  
 });
