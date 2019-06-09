@@ -5,18 +5,16 @@ class TicketDetail extends Component {
   constructor( props ) {
       super( props );
       this.state = {
-        ticket:{}
+        ticket: {}
       };
   }
-  
+  // async and await in componentDidMount is not good practice, the best place for it is in Redux, which is not using in here
+  // Thereforce, async and await here to help testing axios mock data from API
   async componentDidMount() {
     // const id = this.props.match.params.id;
     // Get id from window.location to pass the test otherwise it will promt the error of undefined this.props.match
     const urlArray = window.location.toString().split("/");
     const id = urlArray[urlArray.indexOf("tickets") + 1];
-
-
-
     try {
       const response = await axios.get(`${process.env.REACT_APP_CORS}${process.env.REACT_APP_PROXY}api/v2/tickets/${id}.json`, {
         auth: {
@@ -25,33 +23,14 @@ class TicketDetail extends Component {
         }
       });
       this.setState({
-        ticket: response.data
+        ticket: response.data.ticket
       });
     } catch (e) {
       window.alert("Sorry! Something went wrong. Because of " + e);
     }
   };
 
-
-    // return axios.get(`${process.env.REACT_APP_CORS}${process.env.REACT_APP_PROXY}api/v2/tickets/${id}.json`, {
-    //   auth: {
-    //     username: process.env.REACT_APP_USERNAME,
-    //     password: process.env.REACT_APP_PASSWORD
-    //   }
-    // })
-    // .then(res => {
-    //   this.setState({
-    //     ticket: res.data.ticket
-    //   });
-    // })
-    // .catch(e => {
-    //   alert("Sorry! Something went wrong. Because of " + e);
-    // });
-
-  // }
-
   render() {
-    console.log(this.state.ticket);
     // console.log(this.props.match.params.id);
     return (
       <div className="container mg-top-10">

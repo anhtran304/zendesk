@@ -10,39 +10,22 @@ class TicketList extends Component {
       this.state = {};
   }
 
-   async componentDidMount() {
-
-     
-      try {
-        const response = await axios.get(`${process.env.REACT_APP_CORS}${process.env.REACT_APP_PROXY}api/v2/tickets.json`, {
-          auth: {
-            username: process.env.REACT_APP_USERNAME,
-            password: process.env.REACT_APP_PASSWORD
-          }
-        });
-        this.setState({
-          tickets: response.data
-        });
-        // console.log(response);
-      } catch (e) {
-        window.alert("Sorry! Something went wrong. Because of " + e);
-      }
-
-
-      // return axios.get(`${process.env.REACT_APP_CORS}${process.env.REACT_APP_PROXY}api/v2/tickets.json`, {
-      //   auth: {
-      //     username: process.env.REACT_APP_USERNAME,
-      //     password: process.env.REACT_APP_PASSWORD
-      //   }
-      // })
-      // .then(res => {
-      //   this.setState({
-      //     tickets: res.data
-      //   });
-      // })
-      // .catch(e => {
-      //   alert("Sorry! Something went wrong. Because of " + e);
-      // });
+  // async and await in componentDidMount is not good practice, the best place for it is in Redux, which is not using in here
+  // Thereforce, async and await here to help testing axios mock data from API
+  async componentDidMount() {
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_CORS}${process.env.REACT_APP_PROXY}api/v2/tickets.json`, {
+        auth: {
+          username: process.env.REACT_APP_USERNAME,
+          password: process.env.REACT_APP_PASSWORD
+        }
+      });
+      this.setState({
+        tickets: response.data
+      });
+    } catch (e) {
+      window.alert("Sorry! Something went wrong. Because of " + e);
+    }
   }
 
   render() {
