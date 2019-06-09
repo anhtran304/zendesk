@@ -34,7 +34,7 @@ class TicketDetail extends Component {
   render() {
     // console.log(this.props.match.params.id);
     return (
-      <div className="container mg-top-10">
+      <div className="container my-5">
         <p className="h2">Ticket detail</p>
         <hr/>
         <p><strong>Ticket ID:</strong> {this.state.ticket.id}</p>
