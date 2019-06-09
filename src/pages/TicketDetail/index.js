@@ -12,9 +12,10 @@ class TicketDetail extends Component {
   // Thereforce, async and await here to help testing axios mock data from API
   async componentDidMount() {
     // const id = this.props.match.params.id;
-    // Get id from window.location to pass the test otherwise it will promt the error of undefined this.props.match
+    // Get id of ticket from window.location to pass the test, otherwise it will promt the error of undefined this.props.match
     const urlArray = window.location.toString().split("/");
     const id = urlArray[urlArray.indexOf("tickets") + 1];
+    
     try {
       const response = await axios.get(`${process.env.REACT_APP_CORS}${process.env.REACT_APP_PROXY}api/v2/tickets/${id}.json`, {
         auth: {

@@ -20,11 +20,16 @@ class TableBody extends Component {
                 if ( tickets.length > 0 ) {
                     // Loop through tickets array to create each row in table
                     tickets.forEach( ticket => {
+                        
+                        // sub string description into small sentence to make table row more user friendly
+                        let trimmedDescription = ticket.description.substr(0, 100);
+                        trimmedDescription = trimmedDescription.substr(0, Math.min(trimmedDescription.length, trimmedDescription.lastIndexOf(" ")));
+
                         returnBody.push(
                             <tr className = "li-hover" key={ ticket.id } onClick={ this.handleClick.bind( null, ticket.id ) }>
                                 <td className="d-none">{ ticket.id }</td>
                                 <td>{ ticket.subject }</td>
-                                <td>{ ticket.description }</td>
+                                <td>{ trimmedDescription } ...</td>
                                 <td>{ ticket.priority }</td>
                                 <td>{ ticket.status }</td>
                                 <td>{ ticket.created_at }</td>
