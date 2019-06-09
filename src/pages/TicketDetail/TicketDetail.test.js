@@ -7,8 +7,8 @@ import TicketDetail from "./index.js";
 jest.mock("axios");
 
 // Testing data
-const tickets = {
-    "tickets": [
+const response = {
+    "data": [
         {
             "url": "https://anhtran.zendesk.com/api/v2/tickets/1.json",
             "id": 1,
@@ -65,35 +65,30 @@ const tickets = {
 
 describe("TicketDetail component", () => { 
 
-  it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<TicketDetail />, div);
-    ReactDOM.unmountComponentAtNode(div);
-  });
-
   it("it shows a detail of ticket", async () => {
     // Creating component TicketDetail with testing data
-    const component = create(<TicketDetail tickets = { tickets }/>);
+    const component = create(<TicketDetail tickets = { response.data }/>);
     const testInstance = component.root;
-    
+
     // Testing rendered data to be the same with props data
-    expect(testInstance.findByType(TicketDetail).props.tickets.tickets[0].id).toBe(tickets.tickets[0].id);
-    expect(testInstance.findByType(TicketDetail).props.tickets.tickets[0].subject).toBe(tickets.tickets[0].subject);
-    expect(testInstance.findByType(TicketDetail).props.tickets.tickets[0].description).toBe(tickets.tickets[0].description);
-    expect(testInstance.findByType(TicketDetail).props.tickets.tickets[0].priority).toBe(tickets.tickets[0].priority);
-    expect(testInstance.findByType(TicketDetail).props.tickets.tickets[0].status).toBe(tickets.tickets[0].status);
-    expect(testInstance.findByType(TicketDetail).props.tickets.tickets[0].created_at).toBe(tickets.tickets[0].created_at);
-    expect(testInstance.findByType(TicketDetail).props.tickets.tickets[0].updated_at).toBe(tickets.tickets[0].updated_at);
+
+    expect(testInstance.findByType(TicketDetail).props.tickets[0].id).toBe(response.data[0].id);
+    expect(testInstance.findByType(TicketDetail).props.tickets[0].subject).toBe(response.data[0].subject);
+    expect(testInstance.findByType(TicketDetail).props.tickets[0].description).toBe(response.data[0].description);
+    expect(testInstance.findByType(TicketDetail).props.tickets[0].priority).toBe(response.data[0].priority);
+    expect(testInstance.findByType(TicketDetail).props.tickets[0].status).toBe(response.data[0].status);
+    expect(testInstance.findByType(TicketDetail).props.tickets[0].created_at).toBe(response.data[0].created_at);
+    expect(testInstance.findByType(TicketDetail).props.tickets[0].updated_at).toBe(response.data[0].updated_at);
   });
 
   it('get response data from mock fetching API', async () => {
-      axios.get.mockResolvedValue(tickets);
-      const component = create(<TicketDetail tickets = { tickets }/>);
+      axios.get.mockResolvedValue( response );
+      const component = create(<TicketDetail ticket = { response.data }/>);
       const instance = component.getInstance();
       await instance.componentDidMount();
       // Expect state updated to the same data with response
-      console.log(instance.state);
-      // expect(instance.state.tickets.length).toBe(response.data.length); 
+      // console.log(instance.state); // Work
+    //   expect(instance.state.tickets.length).toBe(tickets.tickets.length);
   });
   
 });

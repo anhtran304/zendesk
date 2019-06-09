@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { create } from "react-test-renderer";
 import axios from "axios";
 
-import TableBody from "../../components/TableBody";
 import TicketList from "./index.js";
 
 jest.mock("axios");

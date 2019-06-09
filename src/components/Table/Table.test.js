@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from 'react-dom';
-import { create } from "react-test-renderer";
 import Table from "./index.js";
 
 describe("Table component", () => {

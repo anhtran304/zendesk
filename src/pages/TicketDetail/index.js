@@ -9,30 +9,50 @@ class TicketDetail extends Component {
       };
   }
   
-  componentDidMount() {
+  async componentDidMount() {
     // const id = this.props.match.params.id;
     // Get id from window.location to pass the test otherwise it will promt the error of undefined this.props.match
     const urlArray = window.location.toString().split("/");
     const id = urlArray[urlArray.indexOf("tickets") + 1];
-    return axios.get(`${process.env.REACT_APP_CORS}${process.env.REACT_APP_PROXY}api/v2/tickets/${id}.json`, {
-      auth: {
-        username: process.env.REACT_APP_USERNAME,
-        password: process.env.REACT_APP_PASSWORD
-      }
-    })
-    .then(res => {
-      this.setState({
-        ticket: res.data.ticket
+
+
+
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_CORS}${process.env.REACT_APP_PROXY}api/v2/tickets/${id}.json`, {
+        auth: {
+          username: process.env.REACT_APP_USERNAME,
+          password: process.env.REACT_APP_PASSWORD
+        }
       });
-    })
-    .catch(e => {
-      alert("Sorry! Something went wrong. Because of " + e);
-    });
-  }
+      this.setState({
+        ticket: response.data
+      });
+    } catch (e) {
+      window.alert("Sorry! Something went wrong. Because of " + e);
+    }
+  };
+
+
+    // return axios.get(`${process.env.REACT_APP_CORS}${process.env.REACT_APP_PROXY}api/v2/tickets/${id}.json`, {
+    //   auth: {
+    //     username: process.env.REACT_APP_USERNAME,
+    //     password: process.env.REACT_APP_PASSWORD
+    //   }
+    // })
+    // .then(res => {
+    //   this.setState({
+    //     ticket: res.data.ticket
+    //   });
+    // })
+    // .catch(e => {
+    //   alert("Sorry! Something went wrong. Because of " + e);
+    // });
+
+  // }
 
   render() {
+    console.log(this.state.ticket);
     // console.log(this.props.match.params.id);
-
     return (
       <div className="container mg-top-10">
         <p className="h2">Ticket detail</p>
