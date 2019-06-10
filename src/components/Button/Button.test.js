@@ -20,7 +20,7 @@ describe("Button component", () => {
         const button = rootInstance.findByType("button");
         
         // Testing rendered data to be the same with props data
-        console.log(button.props);
+        // console.log(button.props);
         expect(button.props.className).toBe(`btn ${bootstrapClassName}`);
         expect(button.props.children).toBe("Next");
         expect(button.props.disabled).toBe(true);

@@ -3,6 +3,7 @@ import { create } from "react-test-renderer";
 import axios from "axios";
 
 import TicketList from "./index.js";
+import Button from "../../components/Button";
 
 jest.mock("axios");
 
@@ -168,6 +169,15 @@ describe("TicketList component", () => {
         await instance.componentDidMount();
         // Expect state updated to the same data with response
         expect(instance.state.tickets.length).toBe(response.data.length); 
+    });
+
+    it("renders the expected button ", () => {
+        const component = create(<TicketList />);
+        const rootInstance = component.root;
+        const listOfButtons = rootInstance.findAllByType(Button);
+        // Expect rendered data to be the same with props data
+        expect(listOfButtons[0].props.text).toBe("Previous");
+        expect(listOfButtons[1].props.text).toBe("Next");
     });
 
 });

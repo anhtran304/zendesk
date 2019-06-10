@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import axios from "axios";
 
+import Button from "../../components/Button";
 class TicketDetail extends Component {
+  // Variable to prevent React setState on unmounted Component
+  _isMounted = false;
   constructor( props ) {
       super( props );
       this.state = {
         ticket: {}
       };
   }
+
   // async and await in componentDidMount is not good practice, the best place for it is in Redux, which is not using in here
   // Thereforce, async and await here to help testing axios mock data from API
   async componentDidMount() {
+    this._isMounted = true;
     // const id = this.props.match.params.id;
     // Get id of ticket from window.location to pass the test, otherwise it will promt the error of undefined this.props.match
     const urlArray = window.location.toString().split("/");
@@ -23,16 +28,21 @@ class TicketDetail extends Component {
           password: process.env.REACT_APP_PASSWORD
         }
       });
-      this.setState({
-        ticket: response.data.ticket
-      });
+      if (this._isMounted) {
+        this.setState({
+          ticket: response.data.ticket
+        });
+      };
     } catch (e) {
       window.alert("Sorry! Something went wrong. Because of " + e);
     }
   };
 
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
   render() {
-    // console.log(this.props.match.params.id);
     return (
       <div className="container my-5">
         <p className="h2">Ticket detail</p>
@@ -44,6 +54,10 @@ class TicketDetail extends Component {
         <p><strong>Status: </strong>{this.state.ticket.status}</p>
         <p><strong>Created at: </strong>{this.state.ticket.created_at}</p>
         <p><strong>Updated at: </strong>{this.state.ticket.updated_at}</p>
+        <hr/>
+        <a href="/tickets" className="navbar-brand">        
+          <Button bootstrapClassName="btn-primary" text="Home"/>
+        </a>
       </div>
     );
   }

@@ -1,7 +1,9 @@
 import React from "react";
 import axios from "axios";
 import { create } from "react-test-renderer";
+
 import TicketDetail from "./index.js";
+import Button from "../../components/Button";
 
 jest.mock("axios");
 
@@ -91,5 +93,12 @@ describe("TicketDetail component", () => {
     expect(testInstance.findByType(TicketDetail).props.ticket.updated_at).toBe(response.data.ticket.updated_at);
   });
 
+  it("renders the expected button ", () => {
+      const component = create(<TicketDetail />);
+      const rootInstance = component.root;
+      const listOfButtons = rootInstance.findAllByType(Button);
+      // Expect rendered data to be the same with props data
+      expect(listOfButtons[0].props.text).toBe("Home");
+  });
   
 });
