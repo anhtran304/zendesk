@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from 'react-dom';
 import { create } from "react-test-renderer";
 import axios from "axios";
 
@@ -155,9 +154,9 @@ const response = {
             "allow_attachments": true
         }
     ],
-    "next_page": "https://anhtran.zendesk.com/api/v2/tickets.json?page=2&per_page=3",
+    "next_page": "https://anhtran.zendesk.com/api/v2/tickets.json?page=1&per_page=25",
     "previous_page": null,
-    "count": 4
+    "count": 104
   };
 
 describe("TicketList component", () => { 

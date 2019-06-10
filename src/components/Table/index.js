@@ -13,7 +13,7 @@ class Table extends Component {
             <table className="table table-bordered table-hover">
                 <thead className="thead-light">
                 <tr key="js-table-tickets">
-                    {/* <th className="d-none">Url</th> */}
+                    {/* Hidden the ID column as user does not need this information */}
                     <th className="d-none">Id</th>
                     <th>Subject</th>
                     <th>Description</th>

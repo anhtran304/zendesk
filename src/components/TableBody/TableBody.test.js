@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from 'react-dom';
-import axios from "axios";
 import { create } from "react-test-renderer";
 import TableBody from "./index.js";
 
