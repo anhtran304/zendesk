@@ -2,15 +2,18 @@ import React, { Component } from 'react';
 import axios from "axios";
 
 import Button from "../../components/Button";
+
+// TicketDetail class component render Ticket detail page
 class TicketDetail extends Component {
   // Variable to prevent React setState on unmounted Component
   _isMounted = false;
+
   constructor( props ) {
       super( props );
       this.state = {
         ticket: {}
       };
-  }
+  };
 
   // async and await in componentDidMount is not good practice, the best place for it is in Redux, which is not using in here
   // Thereforce, async and await here to help testing axios mock data from API
@@ -40,8 +43,9 @@ class TicketDetail extends Component {
 
   componentWillUnmount() {
     this._isMounted = false;
-  }
+  };
 
+  // Render function to render elements on Dom
   render() {
     return (
       <div className="container my-5">
@@ -60,7 +64,7 @@ class TicketDetail extends Component {
         </a>
       </div>
     );
-  }
-}
+  };
+};
 
 export default TicketDetail;

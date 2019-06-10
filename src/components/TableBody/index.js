@@ -6,12 +6,14 @@ class TableBody extends Component {
     constructor( props ) {
         super( props );
         this.state = {};
-    }
+    };
 
+    // Handle click event on each row
     handleClick = ( id ) => {
         window.location =  `tickets/${id}`;
     };
 
+    // Render function to render elements on Dom
     render() {
         let returnBody = []; // Variable array to return mutil row of table
         if ( this.props.tickets ) {
@@ -27,6 +29,7 @@ class TableBody extends Component {
 
                         returnBody.push(
                             <tr className = "li-hover" key={ ticket.id } onClick={ this.handleClick.bind( null, ticket.id ) }>
+                                {/* Hidden the ID column as user does not need this information */}
                                 <td className="d-none">{ ticket.id }</td>
                                 <td>{ ticket.subject }</td>
                                 <td>{ trimmedDescription } ...</td>
@@ -41,7 +44,7 @@ class TableBody extends Component {
             };
         };
         return returnBody;
-    }
-}
+    };
+};
 
 export default TableBody;

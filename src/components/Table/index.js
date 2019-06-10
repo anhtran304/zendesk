@@ -8,6 +8,8 @@ class Table extends Component {
         super( props );
         this.state = {};
     }
+    
+    // Render function to render elements on Dom
     render() {
         return (
             <table className="table table-bordered table-hover">
@@ -28,7 +30,7 @@ class Table extends Component {
                 </tbody>
             </table>
         );
-  }
-}
+    };
+};
 
 export default Table;

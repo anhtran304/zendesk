@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 // Header class component
 class Header extends Component {
+    
+    // Render function to render elements on Dom
     render() {
         return (
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -26,7 +28,7 @@ class Header extends Component {
                 </div>
             </nav>
         );
-    }
-}
+    };
+};
 
 export default Header;

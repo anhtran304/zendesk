@@ -4,6 +4,7 @@ import axios from "axios";
 import Table from "../../components/Table";
 import Button from "../../components/Button";
 
+// TicketList class component render Ticket list page
 class TicketList extends Component {
   // Variable to prevent React setState on unmounted Component
   _isMounted = false;
@@ -18,14 +19,16 @@ class TicketList extends Component {
       };
       this.handlePreviousButton = this.handlePreviousButton.bind(this);
       this.handleNextButton = this.handleNextButton.bind(this);
-  }
-
-  handlePreviousButton() {
-    console.log("handlePreviousButton");
   };
 
+  // Handle fuction for Previous button
+  handlePreviousButton() {
+    this.getTickets(this.state.page - 1);
+  };
+
+  // Handle fuction for Next button
   handleNextButton() {
-    this.getTickets(2);
+    this.getTickets(this.state.page + 1);
   };
 
   // async and await inside componentDidMount is not good practice, the best place for it is in Redux, which is not using in this application.
@@ -39,55 +42,59 @@ class TicketList extends Component {
           password: process.env.REACT_APP_PASSWORD
         }
       });
-      // Calculating number of page for all tickets available
+      // Calculating number of page needed to display all tickets available
       const numberOfPage = Math.ceil( response.data.count / process.env.REACT_APP_TICKETS_PER_PAGE );
       // Set data to state
       if (this._isMounted) {
         if (newPage === 1) {
           this.setState({
             previousButtonDisabled: "YES",
-            nextButtonDisabled: "NO"
+            nextButtonDisabled: "NO",
+            page: newPage
           }); 
         } else if ( 1 < newPage && newPage < numberOfPage ) {
             this.setState({
               previousButtonDisabled: "NO",
-              nextButtonDisabled: "NO"
+              nextButtonDisabled: "NO",
+              page: newPage
             });
         } else if ( newPage === numberOfPage ) {
             this.setState({
               previousButtonDisabled: "NO",
-              nextButtonDisabled: "YES"
+              nextButtonDisabled: "YES",
+              page: newPage
             });
         };
         this.setState({
           tickets: response.data,
           numberOfPage: numberOfPage,
-          page: newPage
+          count: response.data.count
         });
       };
     } catch (e) {
       window.alert("Sorry! Something went wrong. Because of " + e);
-    }
-  }
+    };
+  };
 
   componentDidMount() {
     this._isMounted = true;
-    return this.getTickets(1);
-  }
+    return this.getTickets(this.state.page);
+  };
 
   componentWillUnmount() {
     this._isMounted = false;
-  }
+  };
 
+  // Render function to render elements on Dom
   render() {
     return (
       <div className="container table-responsive my-5">
         <div className="mb-3">
-          <span className="h2">List all tickets</span>
+          <span className="h2">Number of tickets: {this.state.count} </span>
           <span className="h3 float-right">Page: { this.state.page } / { this.state.numberOfPage }</span>
         </div>
         <Table tickets={this.state.tickets}/>
-        <div className="mt-3 d-flex justify-content-between">
+        <div className="my-3 d-flex justify-content-between">
           <Button 
             bootstrapClassName="btn-primary" 
             text="Previous" 
@@ -104,7 +111,7 @@ class TicketList extends Component {
         </div>
       </div>
     );
-  }
-}
+  };
+};
 
 export default TicketList;

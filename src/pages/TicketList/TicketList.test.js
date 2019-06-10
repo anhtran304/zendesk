@@ -168,6 +168,7 @@ describe("TicketList component", () => {
         const instance = component.getInstance();
         await instance.componentDidMount();
         // Expect state updated to the same data with response
+        console.log(instance.state);
         expect(instance.state.tickets.length).toBe(response.data.length); 
     });
 
