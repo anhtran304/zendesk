@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ClipLoader } from 'react-spinners';
 import axios from "axios";
 
 import Table from "../../components/Table";
@@ -12,6 +13,7 @@ class TicketList extends Component {
   constructor( props ) {
       super( props );
       this.state = {
+        loading: true,
         page: 1,
         numberOfPage: 1,
         previousButtonDisabled: "YES",
@@ -23,11 +25,17 @@ class TicketList extends Component {
 
   // Handle fuction for Previous button
   handlePreviousButton() {
+    this.setState({
+      loading: true
+    });
     this.getTickets(this.state.page - 1);
   };
 
   // Handle fuction for Next button
   handleNextButton() {
+    this.setState({
+      loading: true
+    });
     this.getTickets(this.state.page + 1);
   };
 
@@ -64,15 +72,42 @@ class TicketList extends Component {
               nextButtonDisabled: "YES",
               page: newPage
             });
+        } else if ( newPage > numberOfPage ) {
+          // If tickets have been deleted and the actually number of page is less than displaying number of page
+            this.getTickets(numberOfPage);
         };
+
+        // If the numberOfPage === 1, Next button still availabe because might be more tickets just added to system  
+        // User still can click Next to load newest tickets
+
+        // if (numberOfPage === 1) {
+        //   this.setState({
+        //     previousButtonDisabled: "YES",
+        //     nextButtonDisabled: "YES",
+        //     page: newPage
+        //   });
+        // };
+
+        // Update state
         this.setState({
           tickets: response.data,
           numberOfPage: numberOfPage,
-          count: response.data.count
+          count: response.data.count,
+          loading: false
         });
       };
     } catch (e) {
-      window.alert("Sorry! Something went wrong. Because of " + e);
+      if (!e.response) {
+        window.alert("Sorry, please check your connection!");
+      } else {
+        // Http status code
+        const statusCode = e.response.status;
+        if (statusCode === 401) {
+          window.alert("Sorry! You are unauthorized to perform this action!");
+        } else {
+          window.alert('Sorry', e.message);
+        };
+      };
     };
   };
 
@@ -94,6 +129,14 @@ class TicketList extends Component {
           <span className="h3 float-right">Page: { this.state.page } / { this.state.numberOfPage }</span>
         </div>
         <Table tickets={this.state.tickets}/>
+        <div className="d-flex justify-content-center mb-2">
+          <ClipLoader
+            sizeUnit={"px"}
+            size={30}
+            color={'#123abc'}
+            loading={this.state.loading}
+          />
+        </div> 
         <div className="my-3 d-flex justify-content-between">
           <Button 
             bootstrapClassName="btn-primary" 

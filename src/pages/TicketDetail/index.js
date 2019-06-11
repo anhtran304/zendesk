@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ClipLoader } from 'react-spinners';
 import axios from "axios";
 
 import Button from "../../components/Button";
@@ -33,11 +34,24 @@ class TicketDetail extends Component {
       });
       if (this._isMounted) {
         this.setState({
-          ticket: response.data.ticket
+          ticket: response.data.ticket,
+          loading: false
         });
       };
     } catch (e) {
-      window.alert("Sorry! Something went wrong. Because of " + e);
+      if (!e.response) {
+        window.alert("Sorry, please check your connection!");
+      } else {
+        // Http status code
+        const statusCode = e.response.status;
+        if (statusCode === 401) {
+          window.alert("Sorry! You are unauthorized to perform this action!");
+        } else if (statusCode === 404) {
+          window.alert("Sorry! Ticket not found");
+        } else {
+          window.alert('Sorry', e.message);
+        };
+      };
     }
   };
 
@@ -51,7 +65,14 @@ class TicketDetail extends Component {
       <div className="container my-5">
         <p className="h2">Ticket detail</p>
         <hr/>
-        <p><strong>Ticket ID:</strong> {this.state.ticket.id}</p>
+        <div className="d-flex justify-content-center mb-2">
+          <ClipLoader
+            sizeUnit={"px"}
+            size={30}
+            color={'#123abc'}
+            loading={this.state.loading}
+          />
+        </div> 
         <p><strong>Subject: </strong>{this.state.ticket.subject}</p>
         <p><strong>Description: </strong>{this.state.ticket.description}</p>
         <p><strong>Priority: </strong>{this.state.ticket.priority}</p>

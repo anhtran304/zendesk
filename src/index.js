@@ -5,6 +5,7 @@ import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import Header from './layouts/Header';
 import TicketList from './pages/TicketList';
 import TicketDetail from './pages/TicketDetail';
+import NotFound from './pages/NotFound';
 
 serviceWorker.unregister();
 
@@ -13,8 +14,8 @@ const routing = (
     <Header/>
     <Switch>
       <Route exact path="/tickets" component={TicketList} />
-      <Route path="/tickets/:id" render={(props) => <TicketDetail {...props} />}/> 
-      {/* <Route component={NotFound} /> */}
+      <Route exact path="/tickets/:id" render={(props) => <TicketDetail {...props} />}/> 
+      <Route component={ NotFound } />
     </Switch>
   </Router>
 );

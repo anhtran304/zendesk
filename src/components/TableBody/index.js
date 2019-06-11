@@ -29,8 +29,6 @@ class TableBody extends Component {
 
                         returnBody.push(
                             <tr className = "li-hover" key={ ticket.id } onClick={ this.handleClick.bind( null, ticket.id ) }>
-                                {/* Hidden the ID column as user does not need this information */}
-                                <td className="d-none">{ ticket.id }</td>
                                 <td>{ ticket.subject }</td>
                                 <td>{ trimmedDescription } ...</td>
                                 <td>{ ticket.priority }</td>
