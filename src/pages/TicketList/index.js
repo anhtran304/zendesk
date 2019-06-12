@@ -57,7 +57,7 @@ class TicketList extends Component {
     
     try {
       // Using parameter sort_by=created_at to keep newest ticket at the last page, in order to avoid data inaccurate
-      const response = await axios.get(`https://cors-anywhere.herokuapp.com/https://anhtran.zendesk.com/api/v2/tickets.json?page=${ newPage }&per_page=25}&sort_by=created_at`, {
+      const response = await axios.get(`https://cors-anywhere.herokuapp.com/https://anhtran.zendesk.com/api/v2/tickets.json?page=${ newPage }&per_page=25&sort_by=created_at`, {
         auth: {
           username: "tranmr@gmail.com",
           password: "qwerty"
