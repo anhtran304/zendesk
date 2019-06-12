@@ -9,7 +9,7 @@ class Header extends Component {
         return (
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div className="container">
-                    <Link to = "/tickets" className="navbar-brand" >Home</Link>
+                    <Link to = "/" className="navbar-brand" >Home</Link>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav ml-auto">
                         <li className="nav-item dropdown">

@@ -13,6 +13,7 @@ const routing = (
   <Router>
     <Header/>
     <Switch>
+      <Route exact path="/" component={TicketList} />
       <Route exact path="/tickets" component={TicketList} />
       <Route exact path="/tickets/:id" render={(props) => <TicketDetail {...props} />}/> 
       <Route component={ NotFound } />
