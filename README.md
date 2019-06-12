@@ -5,6 +5,16 @@ Author: Anh Tran
 SETUP:
 
     Create .env at root folder with information as below:
+    
+    +++++++++++++++++++++++++++++++++
+    
+    REACT_APP_CORS=https://cors-anywhere.herokuapp.com/
+    REACT_APP_PROXY=https://anhtran.zendesk.com/
+    REACT_APP_USERNAME=tranmr@gmail.com
+    REACT_APP_PASSWORD=qwerty
+    REACT_APP_TICKETS_PER_PAGE=25
+    
+    +++++++++++++++++++++++++++++++++
 
 RUNNING:
 
