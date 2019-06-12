@@ -117,7 +117,8 @@ class TicketList extends Component {
           tickets: response.data,
           numberOfPage: numberOfPage,
           count: response.data.count,
-          loading: false
+          loading: false,
+          errorMessage: null
         });
       };
       

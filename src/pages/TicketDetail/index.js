@@ -46,7 +46,8 @@ class TicketDetail extends Component {
         
         this.setState({
           ticket: response.data.ticket,
-          loading: false
+          loading: false,
+          errorMessage: null
         });
         
       };
