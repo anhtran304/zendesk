@@ -4,13 +4,18 @@ Author: Anh Tran
 
 SETUP:
 
-Create .env at root folder with information as below:
+    Create .env at root folder with information as below:
 
 RUNNING:
 
-npm start
+    npm start
 
-========================================================================================
+
+TESTING:
+
+    npm test
+
+==================================================================================
 
 Why do I choose this approach?
 
