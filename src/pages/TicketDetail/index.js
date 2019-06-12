@@ -35,10 +35,10 @@ class TicketDetail extends Component {
     
     try {
       
-      const response = await axios.get(`https://cors-anywhere.herokuapp.com/https://anhtran.zendesk.com/api/v2/tickets/${id}.json`, {
+      const response = await axios.get(`${process.env.REACT_APP_CORS}${process.env.REACT_APP_PROXY}api/v2/tickets/${id}.json`, {
         auth: {
-          username: "tranmr@gmail.com",
-          password: "qwerty"
+          username: process.env.REACT_APP_USERNAME,
+          password: process.env.REACT_APP_PASSWORD
         }
       });
       
