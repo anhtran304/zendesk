@@ -2,6 +2,10 @@ Zendesk Internship Coding Challenge - 2019
 
 Author: Anh Tran
 
+DEMO: 
+
+http://zendesk-anh.herokuapp.com/
+
 SETUP:
 
     Create .env at root folder with information as below:
